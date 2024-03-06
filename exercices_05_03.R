@@ -68,7 +68,7 @@ total <- sum(tableau_contingence)
 effectifs_théoriques<- outer(rowSums(tableau_contingence), colSums(tableau_contingence)) / total
 
 # Calculer la statistique du test du khi-deux
-khi_2 <- sum((tableau_contingence - expected)^2 / expected)
+khi_2 <- sum((tableau_contingence - effectifs_théoriques)^2 / effectifs_théoriques)
 
 
 
