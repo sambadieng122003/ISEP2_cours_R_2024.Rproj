@@ -62,7 +62,7 @@ summary(donnees_excel)
 #implémenter manuellement le test de khi deux manuellement(avec notre base calculer les effectifs marginaux)
 
 tableau_contingence <- table(data$groupe_age, data$situation_familiale)
-
+print(tableau_contingence)
 # Calculer les fréquences attendues
 total <- sum(tableau_contingence)
 effectifs_théoriques<- outer(rowSums(tableau_contingence), colSums(tableau_contingence)) / total
@@ -76,5 +76,5 @@ khi_2 <- sum((tableau_contingence - effectifs_théoriques)^2 / effectifs_théori
 print(paste("Statistique du test du khi-deux:",khi_2 ))
 
 
-print(tableau_contingence)
+
 
