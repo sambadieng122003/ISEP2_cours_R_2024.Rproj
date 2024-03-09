@@ -1,0 +1,80 @@
+---
+title: "EXERCICE DE MAISON R"
+author: "Samba Dieng"
+date: "08/03/2024"
+output:
+  pdf_document: default
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+# I-STATISTIQUES DESCRIPTIVES
+
+Les statistiques descriptives des differentes variables sont resumees sur le tableau ci-dessous
+```{r, echo = FALSE}
+prenoms <- c("Samba", "PAN", "Ahmadou", "KD", "AMETH")
+noms <- c("Dieng","Niang","Niass","Diakhaté","Faye")
+villes <- c("Dakar", "Thiès", "Saint-Louis", "Kaolack", "Diourbel")
+emplois <- c("Economiste", "data scientist", "Médecin", "Actuaire", "Professeur")
+passe_temps <- c("Lecture", "Sport", "Manger", "Dormir", "Cuisine")
+age <- sample(25:65, 300, replace = TRUE)
+taille <- sample(150:200, 300, replace = TRUE)
+annee_experience <- sample(0:20, 300, replace = TRUE)
+nombre_enfants <- sample(0:5, 300, replace = TRUE)
+salaire <- runif(300, min = 20000, max = 100000)
+note <- runif(300, min = 0, max = 20)
+satisfaction <- runif(300, min = 1, max = 10)
+
+# Générer les données pour les variables catégorielles
+niveau_education <- factor(sample(c("Bfem", "Bac", "Licence", "Master", "Doctorat"), 300, replace = TRUE))
+genre <- factor(sample(c("Homme", "Femme"), 300, replace = TRUE))
+groupe_age <- factor(sample(c("18-25", "26-35", "36-45", "46-55", "56+"), 300, replace = TRUE))
+situation_familiale <- factor(sample(c("Célibataire", "Marié(e)", "Divorcé(e)"), 300, replace = TRUE))
+
+# Créer le dataframe
+data <- data.frame(Prenom = sample(prenoms, 300, replace = TRUE),
+                   Nom = sample(noms, 300, replace = TRUE),
+                   age,
+                   taille,
+                   Ville = sample(villes, 300, replace = TRUE),
+                   Emploi = sample(emplois, 300, replace = TRUE),
+                   Passe_Temps = sample(passe_temps, 300, replace = TRUE),
+                  annee_experience,
+                   nombre_enfants,
+                   salaire,
+                   note,
+                   satisfaction,
+                   niveau_education,
+                   genre,
+                  groupe_age,
+                   situation_familiale)
+
+summary(data)
+
+```
+
+# II-GRAPHIQUE
+Ces quelques graphiques permettent de mieux visualiser certaines tendances
+
+```{r, echo=FALSE}
+library(ggplot2)
+ggplot(data, aes(x = age, y =salaire )) +
+  geom_point(color = "darkgreen") +
+  labs(title = "Relation entre l'age et le salaire", x = "age", y = "salaire")
+sexe <- table(data$genre)
+couleur <- c("orange", "lightcoral")
+pie(sexe, labels = names(sexe), col = couleur, main = "Répartition du sexe")
+
+matrimoniale <- table(data$situation_familiale)
+couleurs <- c("skyblue", "salmon", "lightgreen")
+pie(matrimoniale, labels = names(matrimoniale), col = couleurs, main = "Répartition de la situation familiale")
+
+ggplot(data, aes(x = annee_experience)) +
+  geom_histogram(binwidth = 0.1, fill = "skyblue", color = "black") +
+  labs(title = "Distribution de l'experience", x = "annee experience", y = "Fréquence")
+
+```
