@@ -1,52 +1,38 @@
-                                                                                                                                                                    
-#renommer, crer,labeliser les variables, recoder
-recodage <- data.frame(
-code = c(100, 108, 109, 115, 129, 135, 136, 137, 138, 139, 
-                                143, 145, 147, 149, 251, 255, 568, 569, 570, 571, 
-                                123, 126, 125, 562, 564),
-        description = c("Kg", "Boite de tomate", "Bol", "Calebasse", "Paquet",
-                                       "Sac (100 Kg)", "Sac (25 Kg)", "Sac (5 Kg)", "Sac (50 Kg)", "Sachet",
-                                       "Tas", "Tine", "Unité", "Yorouba", "Quart-Yorouba", "Demi-Yorouba",
-                                       "miche", ":Démi-miche", "Tiers de miche", "Quart de miche",
-                                       "Cup gobelet", "Morceau", "Louche traditionnelle", "Cornet", "Cuillère à soupe")
-                     )
-                     
-                    
-cereales$Unite_cons <- recodage$description[match(cereales$Unite_cons, recodage$code)]
+library("tidyverse")
+glimpse(cereales)
 
+#--Renommer variables
+colnames(cereales)[4:14] <- c("AutresCereales","Qtty_cons",
+                              "Unite_cons","Taille_cons",
+                              "AutoCons","AutresProv",
+                              "DernierAchat","Qtty_achat",
+                              "Unite_achat","Taille_achat",
+                              "Value_achat")
 
-recodage_taille <- data.frame(
-  code = c(0, 1, 2, 3, 4, 5, 6, 7),
-  description = c("Taille unique", "Petit", "Moyen", "Grand", "Quart", "Demi", "Entier", "Très Petite")
-)
-
-
-cereales$Taille_cons <- recodage_taille$description[match(cereales$Taille_cons, recodage_taille$code)]                     
+##-Recodage de la variable cereales__id
+cereales$cereales_id_recoded <- factor(cereales$cereales_id,
+                                       levels = unname(attr(cereales$cereales__id,
+                                                            "labels")),
+                                       labels =names(attr(cereales$cereales__id,
+                                                          "labels")))
+edit(cereales$cereales__id_recoded)
 View(cereales)
 
+##-Recodage de la variable Unite_cons 
+cereales$Unite_cons_recoded <- factor(cereales$Unite_cons,
+                                      levels = unname(attr(cereales$Unite_cons,
+                                                           "labels")),
+                                      labels =names(attr(cereales$Unite_cons,
+                                                         "labels")))
+edit(cereales$Unite_cons_recoded)
 
-recodage_unite2<- data.frame(
-  code = c(100, 108, 109, 115, 129, 135, 136, 137, 138, 139, 
-           143, 145, 147, 149, 251, 255, 568, 569, 570, 571, 
-           123, 126, 125, 562, 564),
-  description = c("Kg", "Boite de tomate", "Bol", "Calebasse", "Paquet",
-                  "Sac (100 Kg)", "Sac (25 Kg)", "Sac (5 Kg)", "Sac (50 Kg)", "Sachet",
-                  "Tas", "Tine", "Unité", "Yorouba", "Quart-Yorouba", "Demi-Yorouba",
-                  "miche", ":Démi-miche", "Tiers de miche", "Quart de miche",
-                  "Cup gobelet", "Morceau", "Louche traditionnelle", "Cornet", "Cuillère à soupe")
-)
-
-
-cereales$Unite_achat <- recodage_unite2$description[match(cereales$Unite_achat, recodage_unite2$code)]
-
-
-recodage_taille2 <- data.frame(
-  code = c(0, 1, 2, 3, 4, 5, 6, 7),
-  description = c("Taille unique", "Petit", "Moyen", "Grand", "Quart", "Demi", "Entier", "Très Petite")
-)
-
-
-cereales$Taille_achat <- recodage_taille2$description[match(cereales$Taille_achat, recodage_taille2$code)]                     
+##-Recodage de la variable Taille_cons
+cereales$Taille_cons_recoded <- factor(cereales$Taille_cons,
+                                       levels = unname(attr(cereales$Taille_cons,
+                                                            "labels")),
+                                       labels =names(attr(cereales$Taille_cons,
+                                                          "labels")))
+edit(cereales$Taille_cons_recoded)
 
 
 library(readxl)
@@ -59,4 +45,18 @@ colnames(Table_de_conversion_phase_2) <- c("cereales_id","produitNom")
 Qtty_cons <- as.factor(Qtty_cons)
 
 # Fusionner les données avec la base R cereales en utilisant la colonne produitID comme clé de fusion
-cereales <- left_join(cereales, Table_de_conversion_phase_2, by = "cereales_id", all.x = TRUE)
+library(readxl)
+Table_de_conversion <- read_excel(
+  "C:/Users/samba/Desktop/EHCVM/Table de conversion phase 2.xlsx")
+
+Table_de_conversion$...8 <- NULL
+Table_de_conversion$...9 <- NULL
+View(Table_de_conversion)
+
+colnames(Table_de_conversion)[1:6] <- c("cereales__id","Nom_Prod",
+                                                "Unite_cons","Nom_Unite",
+                                                "Taille_cons","Nom_Taille")
+
+fusion <- merge(cereales, Table_de_conversion, 
+               by = c("cereales__id", "Unite_cons", "Taille_cons"), all.x = TRUE)
+
