@@ -1,0 +1,67 @@
+---
+title: "RESUME EXPOSE"
+author: "Samba Dieng"
+date: "27/04/2024"
+output: pdf_document
+---
+
+
+# TRAITEMENT DES VALEURS MANQUANTES ET DES VALEURS ABERRANTES AVEC R
+  
+ Le traitement des valeurs aberrantes dans R implique d'abord leur détection, généralement par des méthodes telles que le contrôle sur le domaine des valeurs, la visualisation graphique ou les méthodes statistiques 'comme la méthode de Tukey ou le score Z. Une fois détectées, plusieurs approches de traitement sont disponibles. La suppression directe des valeurs aberrantes est une méthode simple mais peut entraîner une perte de données significative et biaiser les résultats. En alternative, les valeurs aberrantes peuvent être transformées, souvent en les remplaçant par des valeurs manquantes puis en utilisant des méthodes d'imputation pour les remplacer.
+
+Les méthodes d'imputation peuvent inclure le remplacement par la moyenne ou, de manière plus robuste, par la médiane, qui est moins sensible aux valeurs extrêmes. D'autres méthodes de transformation comme la transformation logarithmique peuvent également être utilisées pour atténuer l'impact des valeurs aberrantes. La winsorisation est une approche supplémentaire où les valeurs extrêmes sont plafonnées à un certain percentile, réduisant ainsi leur impact sans les éliminer complètement. Ce processus vise à stabiliser les analyses statistiques en limitant l'influence des valeurs aberrantes.
+
+Les valeurs manquantes dans un ensemble de données peuvent être classées en trois catégories : MCAR (Donnée Manquante Complètement Aléatoire), MAR (Donnée Manquante Aléatoire Conditionnelle) et MNAR (Donnée Manquante Non Aléatoire At Random). Chaque catégorie présente des défis différents en termes de traitement et d'analyse des données.
+
+Il existe plusieurs méthodes pour traiter les valeurs manquantes :
+- Méthode de suppression : Supprimer les observations incomplètes peut être simple mais entraîne une perte de données.
+- Imputation par la moyenne : Remplacer les valeurs manquantes par la moyenne de la variable concernée, utile lorsque les données manquantes sont peu nombreuses et aléatoires.
+- Imputation par la médiane : Similaire à l'imputation par la moyenne mais utilisant la médiane, appropriée lorsque la variable est non symétrique ou sensible aux valeurs aberrantes.
+- Imputation par régression : Utiliser un modèle de régression pour prédire les valeurs manquantes en fonction d'autres variables du jeu de données.
+- Imputation par HOT DECK : Remplacer les valeurs manquantes par des valeurs observées similaires provenant d'autres observations du jeu de données.
+- Imputation par KNN : Identifier les observations les plus proches pour imputer les valeurs manquantes en utilisant la distance euclidienne.
+- Méthode LOCF : Remplacer les valeurs manquantes dans les séries temporelles par la dernière observation disponible.
+
+# STATISTIQUES DESCRIPTIVES ET VISUALISATION DES VARIABLES CATEGORIELLES AVEC GGPLOT2
+
+La grammaire graphique, telle que mise en œuvre dans ggplot2, fournit un cadre cohérent pour construire des visualisations informatives et esthétiquement plaisantes. Elle se compose de composants de base qui peuvent être combinés pour créer une grande variété de graphiques :
+  
+  ## Couches (layers)
+  
+  Les graphiques ggplot2 sont construits à partir de couches. Chaque couche représente un aspect différent de la visualisation, tel que les points de données, les lignes de tendance, les barres d'erreur, etc. L'ajout de couches permet de superposer différents éléments visuels pour enrichir la représentation graphique.
+
+## aes (Aesthetic mappings)
+
+Les aes spécifient comment les variables sont associées aux propriétés visuelles des éléments graphiques. Dans ggplot2, les aes sont définis à l'intérieur de la fonction aes() et peuvent inclure des variables pour contrôler des éléments tels que la taille, la forme, la couleur, le remplissage et la transparence. Dans aes, on a :
+- Size (taille) : Permet de définir la taille des éléments graphiques, tels que les points ou les lignes, en fonction des valeurs d'une variable.
+- Shape (forme) : Détermine la forme des éléments graphiques, comme les points, en fonction des niveaux d'une variable.
+- Color (couleur) : Contrôle la couleur des éléments graphiques en fonction des valeurs d'une variable.
+- Fill (remplissage) : Utilisé pour remplir les éléments graphiques, tels que les barres dans un histogramme, en fonction des niveaux d'une variable.
+- Alpha (transparence) : Spécifie le niveau de transparence des éléments graphiques, permettant de superposer des éléments et de créer des effets visuels complexes.
+
+## Facettage (faceting)
+
+Cette fonctionnalité de ggplot2 permet de diviser les données en sous-groupes et de créer des graphiques séparés pour chaque sous-groupe. Cela permet d'explorer les relations entre les variables dans différents contextes et de faciliter la comparaison entre les sous-groupes.
+
+La composante theme est utilisée pour contrôler l’apparence de différents éléments dans notre graphique tels que les axes, les légendes, les titres, les marges, etc. Elle comprend 4 parties : les elements de theme, les fonctions d’élèment, la foncction theme et les thèmes complets. La composante theme est utilisée pour contrôler l’apparence de différents éléments dans notre graphique tels que les axes, les légendes, les titres, les marges, etc. Elle nous permet de personnaliser l’apparence visuelle de notre graphique pour correspondre à nos besoins ou à nos préférences esthétiques. Dans ggplot2, la composante thématique est constituée de 4 parties principales : - Éléments de thème : Ce sont les composants individuels que nous pouvons contrôler pour personnaliser l’apparence de notre graphique. Par exemple, plot.title contrôle le titre du graphique, axis.ticks.x contrôle les graduations sur l’axe des x, legend.key.height contrôle la hauteur des clés dans la légende, etc. - Fonctions d’élément : Chaque élément de thème est associé à une fonction spécifique qui décrit les propriétés visuelles de cet élément. Par exemple, element_text() est utilisé pour définir la taille, la couleur et le style des élèments de texte tels que plot.title. - La fonction theme() : Cette fonction vous permet de personnaliser les éléments de thème par défaut en utilisant des fonctions d’élément spécifiques. Par exemple, theme(plot.title = element_text(color = “red”)) change la couleur du titre du graphique en rouge. - Thèmes complets : Ce sont des thèmes pré-définis comme theme_grey(), theme_minimal(), etc., qui définissent tous les éléments du thème pour une apparence cohérente. Ces thèmes offrent une solution rapide pour obtenir un aspect visuel uniforme pour tout le graphique.
+
+# ANOVA ET TESTS NON PARAMETRIQUES
+
+L'analyse de la variance (ANOVA) est une méthode statistique puissante développée par Ronald Fisher au début du 20ème siècle pour étudier les différences ou similitudes sur des aspects précis au sein d'une population. Elle explore la relation entre une variable quantitative et une ou deux variables qualitatives, appelées facteurs.
+Si l'ANOVA se concentre sur un seul facteur, on parle d'analyse à un facteur (One-way ANOVA), tandis que si plusieurs facteurs sont étudiés, on parle d'analyse à deux facteurs (MANOVA). Cette méthode est largement utilisée dans de nombreux domaines, notamment la médecine, le marketing, les études environnementales, l'éducation, l'industrie, la psychologie, l'agriculture, la sociologie, et d'autres.
+Cependant, l'ANOVA présente des limitations. Elle suppose que les variances des populations étudiées sont égales et que les données suivent une distribution normale. De plus, elle est sensible aux valeurs aberrantes et ne permet pas de déterminer quel groupe est significativement différent des autres sans tests post-hoc, ce qui augmente le risque d'erreur. Enfin, les résultats dépendent de la qualité de l'échantillon étudié.
+Dans l'ANOVA, on cherche à déterminer si la moyenne d'une variable quantitative est homogène sur l'ensemble des modalités d'une variable qualitative. Pour ce faire, on utilise le test de Fisher, qui compare la variance entre les groupes à la variance à l'intérieur des groupes.
+Prenons un exemple concret : après des olympiades de mathématiques, on se demande si les notes des candidats varient en fonction du correcteur ou du sexe. En utilisant l'ANOVA, on peut déterminer s'il existe un lien entre ces variables et les notes des candidats. En analysant les résultats, on peut conclure que ni le sexe ni le correcteur n'influencent significativement les notes des candidats dans cet exemple spécifique.
+Les tests d'hypothèse sont des procédures décisionnelles qui permettent de choisir entre deux hypothèses statistiques en fonction des données observées.
+Test paramétrique : Il suppose une distribution spécifique des données sous l'hypothèse nulle.
+Test non paramétrique : Il ne suppose pas de distribution spécifique des données et utilise des statistiques qui ne dépendent pas des moyennes et des variances des données initiales.
+
+Types de tests non paramétriques :
+  - Test de rang signé de Wilcoxon : Compare les distributions des variables appariées en tenant compte des différences de signe et d'amplitude entre les paires.
+- Test du khi-carré pour la qualité d'ajustement : Compare les fréquences observées avec les fréquences attendues dans une table de contingence.
+- Test U de Mann-Whitney (Wilcoxon/Mann-Whitney) : Teste si deux échantillons proviennent de la même population en utilisant le rang de chaque observation.
+- Test de Kruskal-Wallis : Une extension du test U de Mann-Whitney, utilisé pour comparer les emplacements des distributions entre plusieurs groupes.
+
+L'exemple d'application présenté concerne l'utilisation d'un test ANOVA pour comparer la longueur des nageoires entre différentes espèces de pingouins. Les étapes incluent la vérification de la normalité des données, l'équivalence des variances, la détection des valeurs aberrantes et enfin la réalisation du test ANOVA lui-même.
+
